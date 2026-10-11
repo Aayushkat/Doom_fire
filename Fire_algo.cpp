@@ -62,5 +62,13 @@ void renderFire(){
     }
 }
 
+void CalculateFirePropogation(){
+     for(int column = 0; column < fireWidth; column++ ){
+        for(int row = fireHeight - 1; row >= 0; row--){
+            int pixelIndex = column + (fireWidth * row);
+
+            Update_Fire_Intensity_per_pixel(pixelIndex);   
+}}}
+
 
 
