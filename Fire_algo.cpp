@@ -4,13 +4,15 @@
 namespace ray{
     #include <raylib.h> 
 }
-const int firewidth=200;
-const int firelength=200;
+const int FireWidth=200;
+const int FireHeight=200;
+
+
 std::vector <int> FirePixel;
 
 
 
-//he Color struct defines a 32-bit RGBA color using four 8-bit unsigned characters (unsigned char), with values ranging from 0 to 255
+//the Color struct defines a 32-bit RGBA color using four 8-bit unsigned characters (unsigned char), with values ranging from 0 to 255
 ray::Color fireColors[] = {
     {0, 0, 0, 255},      {7, 7, 7, 255},       {31, 7, 7, 255},      {47, 15, 7, 255},     {71, 15, 7, 255},     {87, 23, 7, 255},     {103, 31, 7, 255},
     {119, 31, 7, 255},   {143, 39, 7, 255},    {159, 47, 7, 255},    {175, 63, 7, 255},    {191, 71, 7, 255},    {199, 71, 7, 255},    {223, 79, 7, 255},
@@ -21,7 +23,7 @@ ray::Color fireColors[] = {
 };
 
 void createFireDataStructure(){
-const int numpixel=firelength*firewidth;
+const int numpixel=FireHeight*FireWidth;
 FirePixel.resize(numpixel);
 for(int i=0;i<numpixel;i++){
     FirePixel[i]=0;
@@ -30,11 +32,11 @@ for(int i=0;i<numpixel;i++){
 
 
 void Update_Fire_Intensity_per_pixel(int current_pixel_index){
-    const int belowPixelIndex = current_pixel_index+firewidth;
+    const int belowPixelIndex = current_pixel_index+FireWidth;
 
 
     //Bound Checking
-    if(belowPixelIndex>= firelength*firewidth){return; }
+    if(belowPixelIndex>= FireHeight*FireWidth){return; }
 
     int decay=ray::GetRandomValue(0,1);
     const int belowPixelFireIntensity=FirePixel[belowPixelIndex];
@@ -47,7 +49,18 @@ void Update_Fire_Intensity_per_pixel(int current_pixel_index){
         FirePixel[newIndex]=newFireIntensity;  // If decay == 0, it writes straight up into the current pixel, so the heat rises vertically.
                                             // If decay == 1, it writes one pixel to the left, so the heat drifts sideways as it rises.
     }
-    
-
 }
+
+
+void renderFire(){
+    for (int row=0;row<FireHeight:row++){
+            for (int column=0;column<FireWidth;column++){
+                const int pixelIndex = column +(FireWidth*row);
+                const int FireIntensity=FirePixel[pixelIndex];
+                DrawRectangle(column*3,row*3,3,3,fireColors[FireIntensity]);
+            }
+    }
+}
+
+
 
