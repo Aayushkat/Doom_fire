@@ -62,13 +62,21 @@ void renderFire(){
     }
 }
 
+
+
+
 void CalculateFirePropogation(){
      for(int column = 0; column < FireWidth; column++ ){
         for(int row = FireHeight - 1; row >= 0; row--){
             int pixelIndex = column + (FireWidth * row);
 
             Update_Fire_Intensity_per_pixel(pixelIndex);   
-}}}
+}}
+renderFire();}
+
+
+
+
 
 void CreatesourceFire(){
     for(int column = 0; column < FireWidth; column++){
@@ -82,11 +90,17 @@ void CreatesourceFire(){
 int main(){
     ray::InitWindow(FireWidth*3,FireHeight*3,"DOOM FIRE");
     createFireDataStructure();
+
     CreatesourceFire();
+
     while(!ray::WindowShouldClose()){
+
         ray::BeginDrawing();
+
         ray::ClearBackground(ray::BLACK);
+
         CalculateFirePropogation();
+
         ray::EndDrawing();
     }
     ray::CloseWindow();
