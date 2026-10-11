@@ -70,5 +70,13 @@ void CalculateFirePropogation(){
             Update_Fire_Intensity_per_pixel(pixelIndex);   
 }}}
 
+void CreatesourceFire(){
+    for(int column = 0; column < fireWidth; column++){
+        const int overflowPixelIndex = fireWidth * fireHeight;
+        const int pixelIndex = (overflowPixelIndex - fireWidth) + column;
+
+        firePixel[pixelIndex] = 36;
+    }
+}
 
 
