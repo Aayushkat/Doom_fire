@@ -53,7 +53,7 @@ void Update_Fire_Intensity_per_pixel(int current_pixel_index){
 
 
 void renderFire(){
-    for (int row=0;row<FireHeight:row++){
+    for (int row=0; row<FireHeight; row++){
             for (int column=0;column<FireWidth;column++){
                 const int pixelIndex = column +(FireWidth*row);
                 const int FireIntensity=FirePixel[pixelIndex];
@@ -63,19 +63,19 @@ void renderFire(){
 }
 
 void CalculateFirePropogation(){
-     for(int column = 0; column < fireWidth; column++ ){
-        for(int row = fireHeight - 1; row >= 0; row--){
-            int pixelIndex = column + (fireWidth * row);
+     for(int column = 0; column < FireWidth; column++ ){
+        for(int row = FireHeight - 1; row >= 0; row--){
+            int pixelIndex = column + (FireWidth * row);
 
             Update_Fire_Intensity_per_pixel(pixelIndex);   
 }}}
 
 void CreatesourceFire(){
-    for(int column = 0; column < fireWidth; column++){
-        const int overflowPixelIndex = fireWidth * fireHeight;
-        const int pixelIndex = (overflowPixelIndex - fireWidth) + column;
+    for(int column = 0; column < FireWidth; column++){
+        const int overflowPixelIndex = FireWidth * FireHeight;
+        const int pixelIndex = (overflowPixelIndex - FireWidth) + column;
 
-        firePixel[pixelIndex] = 36;
+        FirePixel[pixelIndex] = 36;
     }
 }
 
@@ -84,7 +84,7 @@ int main(){
     createFireDataStructure();
     CreatesourceFire();
     while(!ray::WindowShouldClose()){
-        ray::beginDrawing();
+        ray::BeginDrawing();
         ray::ClearBackground(ray::BLACK);
         CalculateFirePropogation();
         ray::EndDrawing();
