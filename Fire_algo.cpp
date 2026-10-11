@@ -79,4 +79,18 @@ void CreatesourceFire(){
     }
 }
 
+int main(){
+    ray::InitWindow(FireWidth*3,FireHeight*3,"DOOM FIRE");
+    createFireDataStructure();
+    CreatesourceFire();
+    while(!ray::WindowShouldClose()){
+        ray::beginDrawing();
+        ray::ClearBackground(ray::BLACK);
+        CalculateFirePropogation();
+        ray::EndDrawing();
+    }
+    ray::CloseWindow();
+    return 0;
+}
+
 
