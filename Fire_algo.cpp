@@ -42,9 +42,9 @@ void Update_Fire_Intensity_per_pixel(int current_pixel_index){
     const int belowPixelFireIntensity=FirePixel[belowPixelIndex];
 
     int newFireIntensity=(belowPixelFireIntensity-decay)>=0?belowPixelFireIntensity-decay:0;    //subtracts the decay, and clamps at 0 so it never goes negative. This is just max(below - decay, 0).
+    int decay2=ray::GetRandomValue(-1,0);
 
-    int newIndex= current_pixel_index-decay;//  Instead of writing the new intensity into the current pixel, it writes it into current_pixel_index - decay:
-
+    int newIndex= current_pixel_index-decay-decay2;//  Instead of writing the new intensity into the current pixel, it writes it into current_pixel_index - decay:
     if (newIndex>=0){
         FirePixel[newIndex]=newFireIntensity;  // If decay == 0, it writes straight up into the current pixel, so the heat rises vertically.
                                             // If decay == 1, it writes one pixel to the left, so the heat drifts sideways as it rises.
